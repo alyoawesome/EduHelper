@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <title> Education Planner </title>
+
+        <script type="text/javascript">
+            
+            // Issue #2 code begins here 
+            var allMarks = []; 
+            function submitForm() {
+                var courseName = document.getElementById("course-name").value;
+                var workType = document.getElementById("work-type").value; 
+                var weight = document.getElementById("weight").value;
+                var mark = document.getElementById("mark").value;  
+                
+                var entry = {
+                    
+                    cn: courseName,
+                    wt: workType,
+                    w: parseFloat(weight),
+                    m: parseFloat(mark) 
+                };
+                
+                allMarks.push(entry)
+            }
+            // Issue #2 code ends here 
+            
+            // Issue #3 code starts here
+            // Calculate course scores
+  
+            function calculateAverage() {
+            // STEP 1: Create an empty object that will eventually include the course names as its properties. Let's call this object marksBySubject
+            // This includes all the subjects
+               marksBySubject = {};
+                
+                      
+            //STEP 2: Iterate through the allMarks array, and group each mark based on the course. In addition, within each course, we will group the marks based on the work type. We will store all of this inside marksBySubject.
+                
+                
+            // This loop goes through all contents within the allMarks array 
+            // allMarks array(from issue 2) is now set as the variable nextMark
+				for (var i = 0; i < allMarks.length; i++) {
+					var nextMark = allMarks[i];
+                    
+                    // cn uses {} because it's an object and wt uses [] because it's an array. Contents inside objects are more organized than the contents within arrays 
+                    // nextMark = allMarks. This is checking if the marksBySubject object, the object made earlier in this issue, contains the cn and wt that's within nextMark. If not, it makes an object for the cn and an array for the wt. 
+                    if (!marksBySubject[nextMark.cn]) {
+						marksBySubject[nextMark.cn] = {};
+					}
+                    if (!marksBySubject[nextMark.cn][nextMark.wt]) {
+                        marksBySubject[nextMark.cn][nextMark.wt] = [];
+            
+                    }
+                    //pushes all this information, cn and wt (in this order) to the marksBySubject object 
+                    
+                    marksBySubject[nextMark.cn][nextMark.wt].push(nextMark);
+				}
+
+            // STEP 3: Iterate through all the courses inside marksBySubject. For each course, we will calculate the average
+                
+                // Loop is different because it's an object loop instead of an array loop
+                //This loop goes through all the *courses* (which was just implemented in the last step) within the MarkBySubject object.
+                //  subject variable is made in marksBySubject object
+                // nextSubject variable is assigned to marksBySubject object's subject 
+                for (var subject in marksBySubject) {
+					if (marksBySubject.hasOwnProperty(subject)) {
+						var nextSubject = marksBySubject[subject];
+                        // assigning the weights and marks a zero value for now. They will have a values once the user assigns them some.
+                        var totalOfAllWeights = 0;
+                        var totalOfAllMarks = 0; 
+                        
+                        //This loop goes through all the work types in the nextSubject variable 
+                        // nextSubject[workType] means accessing the work type within nextSubject
+                        // workType variable is made in the nextSubject variable
+                        // nextWorkType is assigned to the nextsubject's worktype
+                        for(var workType in nextSubject) {
+                            if (nextSubject.hasOwnProperty(workType)){
+                                var nextWorkType = nextSubject[workType];
+                                
+                                // Retrieve the weight for the current work types 
+                                // declare nextWeight variable and assign it the variable's nextWorkType[0]'s w (weight) because each mark of a particular work type will have the same weight
+                                var nextWeight = nextWorkType[0].w;
+                                totalOfAllWeights = totalOfAllWeights + nextWeight;
+                                
+                                var totalOfAllMarksPerWT = 0;
+                                
+                                // This loop goes through all the marks 
+                                //Using the array for loop instead of the object for loop 
+                                // nextMark variable declared and assigned to nextWorktype
+                                for (var i = 0; i < nextWorkType.length; i++) {
+                                    var nextMark = nextWorkType[i];
+                                    
+                                    // This line updates the value of the current totalOfAllMarksPerWT
+                                    totalOfAllMarksPerWT = totalOfAllMarksPerWT + nextMark.m;
+        
+                                }
+                                
+                                // This is the equation to get the weight
+                                var finalMarkForWT = ((totalOfAllMarksPerWT / nextWorkType.length) / 100) * nextWeight;
+                                // This line updates the value of totalOfAllMarks by summing up the previous value of totalOfAllMarks with finalMarkForWT
+                                totalOfAllMarks = totalOfAllMarks + finalMarkForWT;
+                                
+                            }
+                        }
+                        // This equation takes the totalOfAllMarks and divides the totalOfAllWeights times 100 to get the average for each subject 
+                        var averageForSubject = (totalOfAllMarks / totalOfAllWeights) * 100;
+                        // Finally, we assign the average for each subject to the next subject's final mark. Remember, the variable nextSubject represents the entirety of a subject Eg: Science or math.
+                        nextSubject["finalMark"] = averageForSubject;
+					}
+				}
+                
+                //Put displayOutputs here later
+                displayOutputs();
+            }
+            
+            // Issue #3 code ends here 
+            // Issue #4 code starts here 
+            // Displays outputs 
+            function displayOutputs() {
+                
+               
+                for(var subject in marksBySubject){
+                    if (marksBySubject.hasOwnProperty(subject)) {
+						var nextSubject = marksBySubject[subject];
+                        var nextOutput = document.createElement("div");
+                        nextOutput.innerHTML=subject+": "+nextSubject.finalMark+"%";
+                        document.getElementById("output-wrapper").appendChild(nextOutput);
+                    }
+                    
+                    
+                }
+                 
+                
+                
+                
+            }
+            // Issue #4 code ends here but will be contiued later 
+        
+            
+        </script>
+        
+        <!--Issue #1 code starts here --> 
+    </head> 
+    <body>
+        <h1>Educational Planner</h1>
+        <div class="input-item">  
+            <span> Course Name </span>
+            <input type="text" id="course-name"/>  
+        </div> 
+        <div class="input-item">
+            <span>Type of assignment</span>
+            <select id="work-type"> 
+                <option>Test</option>
+                <option>Homework</option>
+            </select>
+        </div>
+        <div class="input-item">
+            <span>Weight of assignment</span>
+            <input type="text"  id="weight"/> 
+        </div>
+        
+        <div class="input-item">
+            <span>Mark</span>
+            <input type="text" id="mark"/> 
+        </div>
+        <div class="input-item">
+            <button id="submit-button" onclick="submitForm();">
+                Submit
+			</button>
+		</div>
+        <div class="input-item"> 
+            <button id="calc-avg-button" onclick="calculateAverage();">
+                Calculate Average
+            </button>
+            
+            <!-- Issue #4 code continues here --> 
+            <div id="output-wrapper">
+            </div>
+        </div>
+        
+        
+        <!--Issue #1 code ends here --> 
+        <!-- Issue #4 code ends here --> 
+        
+        
+       
+     
+        
+      
+    </body>
+</html>       

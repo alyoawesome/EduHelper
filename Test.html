@@ -108,8 +108,7 @@
 					}
 				}
                 
-                //Put displayOutputs here later
-                displayOutputs();
+               
             }
             
             // Issue #3 code ends here 
@@ -133,7 +132,10 @@
                 
                 
             }
+
+        
             
+        
             
         </script>
         
@@ -167,22 +169,19 @@
 			</button>
 		</div>
         <div class="input-item"> 
-            <button id="calc-avg-button" onclick="calculateAverage();">
-                Calculate Average
-            </button>
+             <input type = "button" onclick = "calculateAverage(); displayOutputs();" value = "Calculate Average">
+                
+    
         </div>
         
         <!--Issue #1 code ends here --> 
         <!-- Issue #4 code starts here --> 
         
-        <button id="Display" onclick="displayOutputs();">
-            Display Percentage
-        </button>
-        <div id="output-wrapper">
-        </div>
+        
+      
         
      
         
       
     </body>
-</html>       
+</html>   
