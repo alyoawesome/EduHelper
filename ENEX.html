@@ -1,6 +1,30 @@
 <html>
     <head>
         <title> Education Planner </title>
+        
+        <style>
+            h1#main-header {
+                text-align: center;
+            }
+            
+            /* Use div because we want to make a vertical space*/
+            div.input-group {
+                text-align: center;
+                margin-top: 25px;
+                margin-bottom: 10px;
+            }
+            /* Get the child of div.input-group because we don't want to touch the buttons and use span because we want to make a horizontal space*/
+            div.input-group > span.input-item{
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            div#submit-button-wrapper {
+                text-align: center;
+                margin-top: 20px;
+            }
+            
+        </style>
 
         <script type="text/javascript">
             
@@ -251,35 +275,47 @@
             } 
         </script>
         
+       
         <!--Issue #1 code starts here --> 
     </head> 
     <body>
-        <h1>Educational Planner</h1>
-        <div class="input-item">  
-            <span> Course Name </span>
-            <input type="text" id="course-name"/>  
-        </div> 
-        <div class="input-item">
-            <span>Type of assignment</span>
-            <select id="work-type"> 
-                <option>Test</option>
-                <option>Homework</option>
-            </select>
-        </div>
-        <div class="input-item">
-            <span>Weight of assignment</span>
-            <input type="text"  id="weight"/> 
+        <h1 id="main-header">EDUCATIONAL PLANNER</h1>
+        
+        <!--Div makes invisible boxes and span puts elements side by side. Div vertical; span horizontal-->
+        <div class="input-group">
+            <span class="input-item">  
+                <span> Course Name </span>
+                <input type="text" id="course-name"/>  
+            </span>
+            
+            <span class="input-item">
+                <span>Type of assignment</span>
+                <select id="work-type"> 
+                    <option>Test</option>
+                    <option>Homework</option>
+                </select>
+            </span>
         </div>
         
-        <div class="input-item">
-            <span>Mark</span>
-            <input type="text" id="mark"/> 
+        <div class="input-group">
+            <span class="input-item">
+                <span>Weight of assignment</span>
+                <input type="text"  id="weight"/> 
+            </span>
+
+            <span class="input-item">
+                <span>Mark</span>
+                <input type="text" id="mark"/> 
+            </span>
         </div>
-        <div class="input-item">
+        
+        <!--make an id inside the div to modify only that div(box)-->
+        <div class="input-item" id="submit-button-wrapper">
             <button id="submit-button" onclick="submitForm();">
                 Submit
-			</button>
-		</div>
+            </button>
+        </div>
+        
         <div class="input-item"> 
             <button id="calc-avg-button" onclick="calculateAverage();">
                 Calculate Average
@@ -300,8 +336,7 @@
         <!--Issue #1 code ends here --> 
         <!-- Issue #4 code ends here --> 
         
-        <style>
-        </style>
+      
     </body>
 </html> 
 
