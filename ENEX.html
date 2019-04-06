@@ -26,18 +26,19 @@
             
             // Issue #3 code starts here
             // Calculate course scores
-  
             function calculateAverage() {
-            // STEP 1: Create an empty object that will eventually include the course names as its properties. Let's call this object marksBySubject
-            // This includes all the subjects
-               marksBySubject = {};
+                document.getElementById("output-wrapper").innerHTML = "";
+                
+                // STEP 1: Create an empty object that will eventually include the course names as its properties. Let's call this object marksBySubject
+                // This includes all the subjects
+                marksBySubject = {};
                 
                       
-            //STEP 2: Iterate through the allMarks array, and group each mark based on the course. In addition, within each course, we will group the marks based on the work type. We will store all of this inside marksBySubject.
-                
-                
-            // This loop goes through all contents within the allMarks array 
-            // allMarks array(from issue 2) is now set as the variable nextMark
+                //STEP 2: Iterate through the allMarks array, and group each mark based on the course. In addition, within each course, we will group the marks based on the work type. We will store all of this inside marksBySubject.
+
+
+                // This loop goes through all contents within the allMarks array 
+                // allMarks array(from issue 2) is now set as the variable nextMark
 				for (var i = 0; i < allMarks.length; i++) {
 					var nextMark = allMarks[i];
                     
@@ -50,20 +51,21 @@
                         marksBySubject[nextMark.cn][nextMark.wt] = [];
             
                     }
-                    //pushes all this information, cn and wt (in this order) to the marksBySubject object 
                     
+                    //pushes all this information, cn and wt (in this order) to the marksBySubject object 
                     marksBySubject[nextMark.cn][nextMark.wt].push(nextMark);
 				}
 
-            // STEP 3: Iterate through all the courses inside marksBySubject. For each course, we will calculate the average
-                
+                // STEP 3: Iterate through all the courses inside marksBySubject. For each course, we will calculate the average
+        
                 // Loop is different because it's an object loop instead of an array loop
-                //This loop goes through all the *courses* (which was just implemented in the last step) within the MarkBySubject object.
+                // This loop goes through all the *courses* (which was just implemented in the last step) within the MarkBySubject object.
                 //  subject variable is made in marksBySubject object
                 // nextSubject variable is assigned to marksBySubject object's subject 
                 for (var subject in marksBySubject) {
 					if (marksBySubject.hasOwnProperty(subject)) {
 						var nextSubject = marksBySubject[subject];
+                        
                         // assigning the weights and marks a zero value for now. They will have a values once the user assigns them some.
                         var totalOfAllWeights = 0;
                         var totalOfAllMarks = 0; 
@@ -96,13 +98,16 @@
                                 
                                 // This is the equation to get the weight
                                 var finalMarkForWT = ((totalOfAllMarksPerWT / nextWorkType.length) / 100) * nextWeight;
+                                
                                 // This line updates the value of totalOfAllMarks by summing up the previous value of totalOfAllMarks with finalMarkForWT
                                 totalOfAllMarks = totalOfAllMarks + finalMarkForWT;
                                 
                             }
                         }
+                        
                         // This equation takes the totalOfAllMarks and divides the totalOfAllWeights times 100 to get the average for each subject 
                         var averageForSubject = (totalOfAllMarks / totalOfAllWeights) * 100;
+                        
                         // Finally, we assign the average for each subject to the next subject's final mark. Remember, the variable nextSubject represents the entirety of a subject Eg: Science or math.
                         nextSubject["finalMark"] = averageForSubject;
 					}
@@ -116,26 +121,134 @@
             // Issue #4 code starts here 
             // Displays outputs 
             function displayOutputs() {
-                
-               
                 for(var subject in marksBySubject){
                     if (marksBySubject.hasOwnProperty(subject)) {
 						var nextSubject = marksBySubject[subject];
                         var nextOutput = document.createElement("div");
                         nextOutput.innerHTML=subject+": "+nextSubject.finalMark+"%";
                         document.getElementById("output-wrapper").appendChild(nextOutput);
-                    }
-                    
-                    
-                }
-                 
-                
-                
-                
+                    }  
+                }   
             }
-            // Issue #4 code ends here but will be contiued later 
-        
             
+            // Issue #4 code ends here but will be continued later 
+            
+            // Issue #5 & 6 
+            // This function provides the studying tips to the user based on the marks
+            function provideLinks() { 
+                calculateAverage(); 
+                
+                var tipsOutput = document.getElementById("tips-wrapper");
+                
+                for (var subject in marksBySubject) {
+					if (marksBySubject.hasOwnProperty(subject)) {
+						var nextSubject = marksBySubject[subject];
+                        
+                        
+                        // Declare the nextOutput variable for the math subject and assign to an empty string. The links are added and stored into this variable in the subsequent lines. 
+                        var nextOutput = "";
+                        if (subject.toLowerCase().trim() === "math" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href='https://www.goconqr.com/en/examtime/blog/how-to-study-maths/'>Studying tips for math</a></li>";
+                            nextOutput += "<li><a href='https://www.khanacademy.org/math'>Khan Academy</a></li>";
+                            nextOutput += "<li><a href='https://www.ck12.org/math/'>Ck-12</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "science" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'www.butte.edu/departments/cas/tipsheets/studystrategies/studybio.html'> Studying tips for Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/biology'>Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/biology/'>Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.educationcorner.com/chemistry-study-skills-guide.html'> Studying tips for Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/chemistry'> Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/chemistry/'> Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://physics.illinois.edu/academics/undergraduates/blog/article/1491'> Studying tips for Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/physics'>  Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/physics/'>  Physics</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>"; 
+                            tipsOutput.innerHTML += nextOutput;
+                            
+                        } else if (subject.toLowerCase().trim() === "biology" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'www.butte.edu/departments/cas/tipsheets/studystrategies/studybio.html'> Studying tips for Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/biology'>Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/biology/'>Biology</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "chemistry" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'www.butte.edu/departments/cas/tipsheets/studystrategies/studybio.html'> Studying tips for Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/chemistry'> Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/chemistry/'> Chemistry</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "physics" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://physics.illinois.edu/academics/undergraduates/blog/article/1491'> Studying tips for Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/physics'>  Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/physics/'>Physics</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "english" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://www.thoughtco.com/how-to-study-english-effectively-1211276'> Studying tips for english</a></li>";
+                            nextOutput += "<li><a href= 'www.easyworldofenglish.com'> easyworldofenglish</a></li>";
+                            nextOutput += "<li><a href= 'https://owl.purdue.edu/site_map.html'> owl.purdue.edu </a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if(subject.toLowerCase().trim() === "socials" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://www.eduplace.com/ss/wtp/testprep/studyskills.html'> Studing tips for socials</a></li>";
+                            nextOutput += "<li><a href= 'https://sites.ualberta.ca/~jkirman/'> Socials</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;             
+                        } else if(subject.toLowerCase().trim() === "language" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://blog.ted.com/how-to-learn-a-new-language-7-secrets-from-ted-translators/'> Studying tips for learning a new language from Ted</a></li>";
+                            nextOutput += "<li><a href= 'https://www.educationcorner.com/foreign-language-study-skills-guide.html'> Studying tips for learning a new language from Education Corner</a></li>";
+                            nextOutput += "<li><a href= 'https://www.duolingo.com'> Free online language learning from Duolingo</a></li>";
+                            nextOutput += "<li><a href= 'https://www.livemocha.co/'> Free online language learning from Livemocha</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;  
+                        } else if(subject.toLowerCase().trim() === "programming" && nextSubject["finalMark"] < 86){
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://www.educationcorner.com/computer-science-study-skills-guide.html'> Studying tips for programming  from Education Corner</a></li>"; 
+                            nextOutput += "<li><a href= 'https://www.codingdojo.com/blog/7-tips-learn-programming-faster'> Studying tips for programming from Coding Dojo </a></li>"; 
+                            nextOutput += "<li><a href= 'https://www.codecademy.com'> Learn programming at Codeacademy </a></li>"; 
+                            nextOutput += "<li><a href= 'https://www.sololearn.com'> Learn programming at Sololearn </a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        }       
+                    }
+                }
+            } 
         </script>
         
         <!--Issue #1 code starts here --> 
@@ -176,15 +289,62 @@
             <div id="output-wrapper">
             </div>
         </div>
-        
-        
+        <div class="input-item">
+            <button id="tips-button" onclick="provideLinks();">
+                Provide Tips
+            </button>
+        </div> 
+        <div id="tips-wrapper">
+        </div>
+
         <!--Issue #1 code ends here --> 
         <!-- Issue #4 code ends here --> 
         
-        
-       
-     
-        
-      
+        <style>
+        </style>
     </body>
-</html>       
+</html> 
+
+
+
+
+
+
+<!-----  1.) Go over debugging in presentation 
+
+2.) Debugging the input (input range[over 100%, over 100 weighted]) 
+ Error screen if yes, continue. if no, cancel 
+
+3.) Debugging the links (Make the program more robust) Eg: science 10,11,12 works too 
+
+4.) Duplication of links 
+
+5.)css  --->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -28,6 +28,7 @@
             // Calculate course scores
   
             function calculateAverage() {
+                document.getElementById("output-wrapper").innerHTML = "";
             // STEP 1: Create an empty object that will eventually include the course names as its properties. Let's call this object marksBySubject
             // This includes all the subjects
                marksBySubject = {};
@@ -108,7 +109,8 @@
 					}
 				}
                 
-               
+                //Put displayOutputs here later
+                displayOutputs();
             }
             
             // Issue #3 code ends here 
@@ -132,17 +134,138 @@
                 
                 
             }
-
-        
+            // Issue #4 code ends here but will be continued later 
             
+            // Issue #5 & 6 
+            // This function provides the studying tips to the user based on the marks
+            function provideLinks() { 
+                calculateAverage(); 
+                
+                var tipsOutput = document.getElementById("tips-wrapper");
+                
+                for (var subject in marksBySubject) {
+					if (marksBySubject.hasOwnProperty(subject)) {
+						var nextSubject = marksBySubject[subject];
+                        
+                        
+                        // Declare the nextOutput variable for the math subject and assign to an empty string. The links are added and stored into this variable in the subsequent lines. 
+                        var nextOutput = "";
+                        if (subject.toLowerCase().trim() === "math" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href='https://www.goconqr.com/en/examtime/blog/how-to-study-maths/'>Studying tips for math</a></li>";
+                            nextOutput += "<li><a href='https://www.khanacademy.org/math'>Khan Academy</a></li>";
+                            nextOutput += "<li><a href='https://www.ck12.org/math/'>Ck-12</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "science" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'www.butte.edu/departments/cas/tipsheets/studystrategies/studybio.html'> Studying tips for Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/biology'>Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/biology/'>Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.educationcorner.com/chemistry-study-skills-guide.html'> Studying tips for Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/chemistry'> Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/chemistry/'> Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://physics.illinois.edu/academics/undergraduates/blog/article/1491'> Studying tips for Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/physics'>  Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/physics/'>  Physics</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>"; 
+                            tipsOutput.innerHTML += nextOutput;
+                            
+                        } else if (subject.toLowerCase().trim() === "biology" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'www.butte.edu/departments/cas/tipsheets/studystrategies/studybio.html'> Studying tips for Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/biology'>Biology</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/biology/'>Biology</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "chemistry" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'www.butte.edu/departments/cas/tipsheets/studystrategies/studybio.html'> Studying tips for Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/chemistry'> Chemistry</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/chemistry/'> Chemistry</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "physics" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://physics.illinois.edu/academics/undergraduates/blog/article/1491'> Studying tips for Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.khanacademy.org/science/physics'>  Physics</a></li>";
+                            nextOutput += "<li><a href= 'https://www.ck12.org/c/physics/'>Physics</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if (subject.toLowerCase().trim() === "english" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://www.thoughtco.com/how-to-study-english-effectively-1211276'> Studying tips for english</a></li>";
+                            nextOutput += "<li><a href= 'www.easyworldofenglish.com'> easyworldofenglish</a></li>";
+                            nextOutput += "<li><a href= 'https://owl.purdue.edu/site_map.html'> owl.purdue.edu </a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        } else if(subject.toLowerCase().trim() === "socials" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://www.eduplace.com/ss/wtp/testprep/studyskills.html'> Studing tips for socials</a></li>";
+                            nextOutput += "<li><a href= 'https://sites.ualberta.ca/~jkirman/'> Socials</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;             
+                        } else if(subject.toLowerCase().trim() === "language" && nextSubject["finalMark"] < 86) {
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://blog.ted.com/how-to-learn-a-new-language-7-secrets-from-ted-translators/'> Studying tips for learning a new language from Ted</a></li>";
+                            nextOutput += "<li><a href= 'https://www.educationcorner.com/foreign-language-study-skills-guide.html'> Studying tips for learning a new language from Education Corner</a></li>";
+                            nextOutput += "<li><a href= 'https://www.duolingo.com'> Free online language learning from Duolingo</a></li>";
+                            nextOutput += "<li><a href= 'https://www.livemocha.co/'> Free online language learning from Livemocha</a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;  
+                        } else if(subject.toLowerCase().trim() === "programming" && nextSubject["finalMark"] < 86){
+                            nextOutput += "<div>";
+                            nextOutput += "<span>" + subject + "</span>";
+                            nextOutput += "<ul>";
+                            nextOutput += "<li><a href= 'https://www.educationcorner.com/computer-science-study-skills-guide.html'> Studying tips for programming  from Education Corner</a></li>"; 
+                            nextOutput += "<li><a href= 'https://www.codingdojo.com/blog/7-tips-learn-programming-faster'> Studying tips for programming from Coding Dojo </a></li>"; 
+                            nextOutput += "<li><a href= 'https://www.codecademy.com'> Learn programming at Codeacademy </a></li>"; 
+                            nextOutput += "<li><a href= 'https://www.sololearn.com'> Learn programming at Sololearn </a></li>";
+                            nextOutput += "</ul>";
+                            nextOutput += "</div>";
+                            tipsOutput.innerHTML += nextOutput;
+                        }       
+                    }
+                }
+            }
         
             
         </script>
         
         <!--Issue #1 code starts here --> 
-    </head> 
+    </head>
+            
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            
     <body>
-        <h1>Educational Planner</h1>
+        <div class="w3-container w3-center w3-animate-top">
+            <h1>Educational Planner</h1>
+        </div>
         <div class="input-item">  
             <span> Course Name </span>
             <input type="text" id="course-name"/>  
@@ -163,25 +286,148 @@
             <span>Mark</span>
             <input type="text" id="mark"/> 
         </div>
+        
+              <!--------IS IT OKAY IF I CHANGE ID TO CLASS AND THE ON-CLICK?--->
         <div class="input-item">
             <button id="submit-button" onclick="submitForm();">
                 Submit
 			</button>
 		</div>
+        
+        
         <div class="input-item"> 
-             <input type = "button" onclick = "calculateAverage(); displayOutputs();" value = "Calculate Average">
-                
-    
+            <button id="calc-avg-button" onclick="calculateAverage();">
+                Calculate Average
+            </button>
+            
+            <!-- Issue #4 code continues here --> 
+            <div id="output-wrapper">
+            </div>
+        </div>
+        <div class="input-item">
+            <button id="tips-button" onclick="provideLinks();">
+                Provide Tips
+            </button>
+        </div> 
+        <div id="tips-wrapper">
         </div>
         
+        
+
+  
+
+        
+  
+        
+        
+        
+        
         <!--Issue #1 code ends here --> 
-        <!-- Issue #4 code starts here --> 
+        <!-- Issue #4 code ends here --> 
         
-        
+   
+
+                
+ <div class="content">
+    <div class="random"><span class="nbr ltr">0</span><span class="nbr ltr">0</span><span class="nbr ltr">0</span><span class="nbr ltr">0</span><span class="nbr ltr">0</span>
+      <span class="nbr ltr">0</span><span class="nbr ltr">0</span><span class="nbr ltr">0</span><span class="nbr ltr">0</span><span class="nbr ltr">0</span></div>
+  </div>
+    
+    
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  <script src="js/index.js"></script>
+
+   
       
-        
-     
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 100;
+  background-color: #222;
+  color: #eee;
+  width: 100%;
+  height: 100%;
+}
+html .content, body .content {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+html .content span, body .content span {
+  width: 30px;
+  display: inline-block;
+}</style>
+
+
+    
+    
+    
+    
+    
+<script>
+$(document).ready(function(){
+  
+  var $randomnbr = $('.nbr');
+  var $timer= 10;
+  var $it;
+  var $data = 0;
+  var index;
+  var change;
+  var letters = ["E", "D", "U", "C", "A", "T", "I", "O", "N", "A","L"];
+  
+  $randomnbr.each(function(){
+      
+    change = Math.round(Math.random()*100);
+    $(this).attr('data-change', change);
+    
+  });
+  
+  function random(){
+    return Math.round(Math.random()*10);
+  };
+  
+  function select(){
+    return Math.round(Math.random()*$randomnbr.length+1);
+  };
+  
+  function value(){
+    $('.nbr:nth-child('+select()+')').html(''+random()+'');
+    $('.nbr:nth-child('+select()+')').attr('data-number', $data);
+    $data++;
+    
+    $randomnbr.each(function(){
+        if(parseInt($(this).attr('data-number')) > parseInt($(this).attr('data-change'))){
+          index = $('.ltr').index(this);
+          $(this).html(letters[index]);
+          $(this).removeClass('nbr');
+        }
+    });
+    
+  };
+  
+  $it = setInterval(value, $timer);
+    
+});
+</script>
+      
+   
         
       
     </body>
-</html>   
+</html> 
+       
+      
+   
+
+
+ 
