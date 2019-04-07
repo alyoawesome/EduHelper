@@ -24,10 +24,37 @@
                 margin-top: 20px;
             }
             
+            div#tabs {
+                text-align: center;
+                margin-top: 20px;
+            }
+            
+            /* Use padding to make border larger */
+            span.tab {
+                padding-right: 10px;
+                padding-left: 10px; 
+                border-style: solid;
+                border-bottom: none;
+            }
+            
+            span.selected-tab {
+                background-color: crimson
+            }
+            
+            div#main-output {
+                border-top: solid 1px; 
+            }
+            
+            div#main-output > div {
+                display: none;
+            }
+            
+            div#main-output > div.selected-wrapper {
+                display: block;
+            }
         </style>
 
         <script type="text/javascript">
-            
             // Issue #2 code begins here 
             var allMarks = []; 
             function submitForm() {
@@ -44,14 +71,17 @@
                     m: parseFloat(mark) 
                 };
                 
-                allMarks.push(entry)
+                allMarks.push(entry);
+                
+                var marksWrapper = document.getElementById("marks-wrapper");
+                marksWrapper.innerHTML += "<div class='mark-item'>" + courseName + ", " + workType + ": " + mark + "% (weight: " + weight + ")</div>";
             }
             // Issue #2 code ends here 
             
             // Issue #3 code starts here
             // Calculate course scores
             function calculateAverage() {
-                document.getElementById("output-wrapper").innerHTML = "";
+                document.getElementById("average-wrapper").innerHTML = "";
                 
                 // STEP 1: Create an empty object that will eventually include the course names as its properties. Let's call this object marksBySubject
                 // This includes all the subjects
@@ -150,7 +180,7 @@
 						var nextSubject = marksBySubject[subject];
                         var nextOutput = document.createElement("div");
                         nextOutput.innerHTML=subject+": "+nextSubject.finalMark+"%";
-                        document.getElementById("output-wrapper").appendChild(nextOutput);
+                        document.getElementById("average-wrapper").appendChild(nextOutput);
                     }  
                 }   
             }
@@ -162,7 +192,8 @@
             function provideLinks() { 
                 calculateAverage(); 
                 
-                var tipsOutput = document.getElementById("tips-wrapper");
+                var tipsOutput = document.getElementById("links-wrapper");
+                tipsOutput.innerHTML = "";
                 
                 for (var subject in marksBySubject) {
 					if (marksBySubject.hasOwnProperty(subject)) {
@@ -272,7 +303,46 @@
                         }       
                     }
                 }
-            } 
+            }
+            
+            function clickMarks() {
+                var marksTab = document.getElementById("marks-tab");
+                var marksWrapper = document.getElementById("marks-wrapper");
+                
+                resetTabsAndWrappers();
+                marksTab.style.backgroundColor = "crimson"; 
+                marksWrapper.style.display = "block";  
+            }
+            
+            function clickAverage() {
+                calculateAverage();
+                var averageTab = document.getElementById("average-tab");
+                var averageWrapper = document.getElementById("average-wrapper");
+                
+                resetTabsAndWrappers();
+                averageTab.style.backgroundColor = "crimson"; 
+                averageWrapper.style.display = "block";
+            }
+            
+            function clickLinks() {
+                provideLinks();
+                var linksTab = document.getElementById("links-tab");
+                var linksWrapper = document.getElementById("links-wrapper");
+                
+                resetTabsAndWrappers();
+                linksTab.style.backgroundColor = "crimson"; 
+                linksWrapper.style.display = "block";  
+            }
+            
+            function resetTabsAndWrappers() {
+                document.getElementById("marks-tab").style.backgroundColor = "white";
+                document.getElementById("average-tab").style.backgroundColor = "white";
+                document.getElementById("links-tab").style.backgroundColor = "white";
+                
+                document.getElementById("marks-wrapper").style.display = "none";
+                document.getElementById("average-wrapper").style.display = "none";
+                document.getElementById("links-wrapper").style.display = "none";
+            }
         </script>
         
        
@@ -321,22 +391,32 @@
                 Calculate Average
             </button>
             
-            <!-- Issue #4 code continues here --> 
-            <div id="output-wrapper">
-            </div>
+            <!-- Issue #4 code continues here -->   
         </div>
         <div class="input-item">
             <button id="tips-button" onclick="provideLinks();">
                 Provide Tips
             </button>
         </div> 
-        <div id="tips-wrapper">
-        </div>
-
+        
         <!--Issue #1 code ends here --> 
         <!-- Issue #4 code ends here --> 
         
-      
+        <div id="tabs">
+            <span id="marks-tab" class="tab selected-tab" onclick="clickMarks();">MARKS</span>
+            <span id="average-tab" class="tab" onclick="clickAverage();">AVERAGE</span>
+            <span id="links-tab" class="tab" onclick="clickLinks();">LINKS</span>
+        </div>
+        <div id="main-output">
+            <div id="marks-wrapper" class="wrapper selected-wrapper">
+            </div>
+            
+            <div id="average-wrapper" class="wrapper">
+            </div>
+
+            <div id="links-wrapper" class="wrapper">
+            </div>
+        </div>
     </body>
 </html> 
 
