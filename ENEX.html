@@ -3,8 +3,13 @@
         <title> Education Planner </title>
         
         <style>
+            body{
+                background-color: #222;
+                color: #eee;
+            }
             h1#main-header {
                 text-align: center;
+                font-size: 40px;
             }
             
             /* Use div because we want to make a vertical space*/
@@ -35,6 +40,7 @@
                 padding-left: 10px; 
                 border-style: solid;
                 border-bottom: none;
+                font-size: 25px;
             }
             
             span.selected-tab {
@@ -52,29 +58,62 @@
             div#main-output > div.selected-wrapper {
                 display: block;
             }
+            
+            div.mark-item {
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                font-size: 20px;
+            }
+            
+            div#average-wrapper > div {
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                font-size: 20px;
+            }
         </style>
 
         <script type="text/javascript">
             // Issue #2 code begins here 
             var allMarks = []; 
+            
             function submitForm() {
                 var courseName = document.getElementById("course-name").value;
                 var workType = document.getElementById("work-type").value; 
                 var weight = document.getElementById("weight").value;
-                var mark = document.getElementById("mark").value;  
+                var mark = document.getElementById("mark").value; 
+                
+                // This prevents the user from entering invalid values 
+                if (isNaN(weight)) {
+                    alert("The weight must be a number");
+                    return;
+                }
+                
+                if (isNaN(mark)) {
+                    alert("The mark must be a number");
+                    return;
+                }
+                
+                if (parseFloat(weight) < 0 || parseFloat(mark) < 0) {
+                    alert("The mark and weight have to be greater than or equal to 0");
+                    return;
+                }
                 
                 var entry = {
-                    
-                    cn: courseName,
+                    cn: courseName.toLowerCase(),
                     wt: workType,
                     w: parseFloat(weight),
-                    m: parseFloat(mark) 
+                    m: parseFloat(mark)
                 };
                 
                 allMarks.push(entry);
                 
                 var marksWrapper = document.getElementById("marks-wrapper");
-                marksWrapper.innerHTML += "<div class='mark-item'>" + courseName + ", " + workType + ": " + mark + "% (weight: " + weight + ")</div>";
+                marksWrapper.innerHTML += "<div class='mark-item'>" + courseName.toUpperCase() + ", " + workType + ": " + mark + "% (weight: " + weight + ")</div>";
+            
+                calculateAverage();
+                provideLinks();
             }
             // Issue #2 code ends here 
             
@@ -335,9 +374,9 @@
             }
             
             function resetTabsAndWrappers() {
-                document.getElementById("marks-tab").style.backgroundColor = "white";
-                document.getElementById("average-tab").style.backgroundColor = "white";
-                document.getElementById("links-tab").style.backgroundColor = "white";
+                document.getElementById("marks-tab").style.backgroundColor = "#222";
+                document.getElementById("average-tab").style.backgroundColor = "#222";
+                document.getElementById("links-tab").style.backgroundColor = "#222";
                 
                 document.getElementById("marks-wrapper").style.display = "none";
                 document.getElementById("average-wrapper").style.display = "none";
@@ -386,21 +425,8 @@
             </button>
         </div>
         
-        <div class="input-item"> 
-            <button id="calc-avg-button" onclick="calculateAverage();">
-                Calculate Average
-            </button>
-            
-            <!-- Issue #4 code continues here -->   
-        </div>
-        <div class="input-item">
-            <button id="tips-button" onclick="provideLinks();">
-                Provide Tips
-            </button>
-        </div> 
-        
         <!--Issue #1 code ends here --> 
-        <!-- Issue #4 code ends here --> 
+
         
         <div id="tabs">
             <span id="marks-tab" class="tab selected-tab" onclick="clickMarks();">MARKS</span>
@@ -419,6 +445,7 @@
         </div>
     </body>
 </html> 
+<!-- Issue #4 code ends here --> 
 
 
 
