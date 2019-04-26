@@ -300,7 +300,7 @@
                         
                         // Declare the nextOutput variable for the math subject and assign to an empty string. The links are added and stored into this variable in the subsequent lines. 
                         var nextOutput = "";
-                        if (subject.toLowerCase().trim() === "math" && nextSubject["finalMark"] < 86) {
+                        if (subject.toLowerCase().trim().indexOf("math") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -310,7 +310,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;
-                        } else if (subject.toLowerCase().trim() === "science" && nextSubject["finalMark"] < 86) {
+                        } else if (subject.toLowerCase().trim().indexOf("science") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -327,7 +327,7 @@
                             nextOutput += "</div>"; 
                             tipsOutput.innerHTML += nextOutput;
                             
-                        } else if (subject.toLowerCase().trim() === "biology" && nextSubject["finalMark"] < 86) {
+                        } else if (subject.toLowerCase().trim().indexOf("biology") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -337,7 +337,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;
-                        } else if (subject.toLowerCase().trim() === "chemistry" && nextSubject["finalMark"] < 86) {
+                        } else if (subject.toLowerCase().trim().indexOf("chemistry") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -347,7 +347,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;
-                        } else if (subject.toLowerCase().trim() === "physics" && nextSubject["finalMark"] < 86) {
+                        } else if (subject.toLowerCase().trim().indexOf("physics") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -357,7 +357,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;
-                        } else if (subject.toLowerCase().trim() === "english" && nextSubject["finalMark"] < 86) {
+                        } else if (subject.toLowerCase().trim().indexOf("english") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -367,7 +367,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;
-                        } else if(subject.toLowerCase().trim() === "socials" && nextSubject["finalMark"] < 86) {
+                        } else if(subject.toLowerCase().trim().indexOf("socials") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -376,7 +376,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;             
-                        } else if(subject.toLowerCase().trim() === "language" && nextSubject["finalMark"] < 86) {
+                        } else if(subject.toLowerCase().trim().indexOf("language") >= 0 && nextSubject["finalMark"] < 86) {
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -387,7 +387,7 @@
                             nextOutput += "</ul>";
                             nextOutput += "</div>";
                             tipsOutput.innerHTML += nextOutput;  
-                        } else if(subject.toLowerCase().trim() === "programming" && nextSubject["finalMark"] < 86){
+                        } else if(subject.toLowerCase().trim().indexOf("programming") >= 0 && nextSubject["finalMark"] < 86){
                             nextOutput += "<div>";
                             nextOutput += "<span>" + subject + "</span>";
                             nextOutput += "<ul>";
@@ -643,8 +643,8 @@
                 <br />
                 <input type="text" id="save-name" /> <!--input textbox -->
                 <br /><br />
-                <button id="save button" onclick="saveData();">Save</button> <!-- save button -->
-                <button class="cancel-button" onclick="cancelSavaData();">Cancel</button> <!--cancel button-->
+                <button id="save-button" onclick="saveData();">Save</button> <!-- save button -->
+                <button class="cancel-button" onclick="cancelSaveData();">Cancel</button> <!--cancel button-->
             </div>
         </div>
         <div id="load-popup-wrapper" class="popup-wrapper">
