@@ -454,7 +454,7 @@
             }
             
             // gets the popup by id but conceals it 
-            function hidepopup(id) {
+            function hidePopup(id) {
                 hidePopupBackground();
                 var popupWrapper = document.getElementById(id);
                 popupWrapper.style.display = "none";
@@ -475,7 +475,7 @@
                 for (var i = 0; i < keysLength; i++) {
                     var nextKey = localStorage.key(i);
                     // In each iteration of this loop, a key(name) is added to the  select element
-                    listofSaves.innerHTML += "<option value='" + nextKey + "'>" + "</option>";
+                    listOfSaves.innerHTML += "<option value='" + nextKey + "'>" + nextKey + "</option>";
                 }
                 
                 // Let's show the load popup
@@ -487,8 +487,8 @@
                 var saveName = document.getElementById("save-name").value
                 
                 //check if the save name has already been taken
-                var keyslength = localStorage.length;
-                for (var i = 0; i < keyslength; i++) {
+                var keysLength = localStorage.length;
+                for (var i = 0; i < keysLength; i++) {
                     var nextKey = localStorage.key(i);
                     if (nextKey === saveName) {
                         // If the save name is taken, confirm if the user is ok with overriding its data
@@ -542,16 +542,18 @@
                 calculateAverage();
                 provideLinks();
                 
+                //Go to the marks tab (This makes the software more user-friendly because it instantly goes to the marks tab after the user loads the marks)
+                clickMarks();   
             }
                             
-            // uses hidepopup function and adds an id to its pararmeter
+            // uses hidePopup function and adds an id to its pararmeter
             function cancelSaveData(){ 
-                hidepopup("save-popup-wrapper");
+                hidePopup("save-popup-wrapper");
             }
             
-            // uses hidepopup function and adds an id to its pararmeter
+            // uses hidePopup function and adds an id to its pararmeter
             function cancelLoadData() {
-                hidepopup("load-popup-wrapper");
+                hidePopup("load-popup-wrapper");
             } 
         </script>
        
