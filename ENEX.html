@@ -151,6 +151,13 @@
                     return;
                 }
                 
+                // Do not display code when the textboxes are empty 
+                if (courseName.trim() == "" || weight.trim() == "" || mark.trim() == "") {
+                    alert("The textboxes must not be empty");
+                    return;
+                }
+                    
+                
                 var entry = {
                     cn: courseName.toLowerCase(),
                     wt: workType,
@@ -166,6 +173,7 @@
                 calculateAverage();
                 provideLinks();
             }
+            
             // Issue #2 code ends here 
             
             // Issue #3 code starts here
