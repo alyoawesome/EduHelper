@@ -2,128 +2,10 @@
     <head>
         <title> Education Planner </title>
         
-        <style>
-            body{
-                background-color: #222;
-                color: #eee;
-                
-            }
-            h1#main-header {
-                text-align: center;
-                font-size: 40px;
-            }
-            
-            /* Use div because we want to make a vertical space*/
-            div.input-group {
-                text-align: center;
-                margin-top: 25px;
-                margin-bottom: 10px;
-            }
-            /* Get the child of div.input-group because we don't want to touch the buttons and use span because we want to make a horizontal space*/
-            div.input-group > span.input-item{
-                margin-left: 15px;
-                margin-right: 15px;
-            }
-            
-            div#submit-button-wrapper {
-                text-align: center;
-                margin-top: 20px;
-            }
-            
-            div#save-load-wrapper {
-                text-align: center;
-                margin-top: 20px;
-            }
-            
-            div#tabs {
-                text-align: center;
-                margin-top: 20px;
-            }
-            
-            /* Use padding to make border larger */
-            span.tab {
-                padding-right: 10px;
-                padding-left: 10px; 
-                border-style: solid;
-                border-bottom: none;
-                font-size: 25px;
-            }
-            
-            span.selected-tab {
-                background-color: crimson
-            }
-            
-            div#main-output {
-                border-top: solid 1px; 
-            }
-            
-            div#main-output > div {
-                display: none;
-            }
-            
-            div#main-output > div.selected-wrapper {
-                display: block;
-            }
-            
-            div.mark-item {
-                text-align: center;
-                margin-top: 15px;
-                margin-bottom: 15px;
-                font-size: 20px;
-            }
-            
-            div#average-wrapper > div {
-                text-align: center;
-                margin-top: 15px;
-                margin-bottom: 15px;
-                font-size: 20px;
-            }
-            
-            div#links-wrapper {
-                text-align: center;
-                margin-top: 15px;
-                margin-bottom: 15px;
-                font-size: 20px;
-            }
-            
-            div#popup-background {
-                display: none;  /*set to none so that the popup doesn't appear by default*/
-                position: fixed; /*allows the popup to cover the whole page*/
-                top: 0px; 
-                left: 0px;
-                width: 100%;
-                height: 100%;
-                background-color: grey; 
-                opacity: 0.5; /*We want the popup to be a bit translucent*/
-                z-index: 9998; /*seeting the index to 9998 means that all other html elements on the website will be inaccessible when the popup is in use*/
-                border-style: solid;
-            }
-            
-            div.popup-wrapper {
-                display: none;
-                text-align: center;
-                position: fixed;
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                height: 100%;
-                margin-left: auto;
-                margin-right: auto;
-                z-index: 9999;
-            }
-            
-            .popup {
-                text-align: center;
-                background-color: white;
-                color: black;
-                border-style: solid;
-                border-width: 5px;
-                margin: 100px;
-                margin-left: 300px;
-                margin-right: 300px;
-                padding: 50px;
-            }
-        </style>
+        
+        <link rel="stylesheet" type="text/css" href="main.css" />
+        <link rel="stylesheet" type="text/css" href="button.css" />
+        <link rel="stylesheet" type="text/css" href="tab.css" />
 
         <script type="text/javascript">
             // Issue #2 code begins here 
@@ -408,7 +290,7 @@
                 var marksWrapper = document.getElementById("marks-wrapper");
                 
                 resetTabsAndWrappers();
-                marksTab.style.backgroundColor = "crimson"; 
+                marksTab.style.backgroundColor = "#899D78"; 
                 marksWrapper.style.display = "block";  
             }
             
@@ -418,7 +300,7 @@
                 var averageWrapper = document.getElementById("average-wrapper");
                 
                 resetTabsAndWrappers();
-                averageTab.style.backgroundColor = "crimson"; 
+                averageTab.style.backgroundColor = "#899D78"; 
                 averageWrapper.style.display = "block";
             }
             
@@ -428,7 +310,7 @@
                 var linksWrapper = document.getElementById("links-wrapper");
                 
                 resetTabsAndWrappers();
-                linksTab.style.backgroundColor = "crimson"; 
+                linksTab.style.backgroundColor = "#899D78"; 
                 linksWrapper.style.display = "block";  
             }
             
@@ -600,26 +482,26 @@
         
         <!--make an id inside the div to modify only that div(box)-->
         <div class="input-item" id="submit-button-wrapper">
-            <button id="submit-button" onclick="submitForm();">
+            <a href="#0" class="bttn" id="submit-button" onclick="submitForm();">
                 Submit
-            </button>
+            </a>
         </div>
         
         <!--Issue #1 code ends here --> 
         <div class="input-item" id="save-load-wrapper">
-            <button id="show-save-button" onclick="showSaveData();">
+            <a href="#0" class="bttn" id="show-save-button" onclick="showSaveData();">
                 Save Data 
-            </button>
-            <button id="show-load-button" onclick="showLoadData();">
-                Load data 
-            </button>
+            </a>
+            <a href="#0" class="bttn" id="show-load-button" onclick="showLoadData();">
+                Load Data 
+            </a>
         </div>
 
         
         <div id="tabs">
-            <span id="marks-tab" class="tab selected-tab" onclick="clickMarks();">MARKS</span>
-            <span id="average-tab" class="tab" onclick="clickAverage();">AVERAGE</span>
-            <span id="links-tab" class="tab" onclick="clickLinks();">TIPS</span>
+            <a href="#0" class="tb tab selected-tab" id="marks-tab" onclick="clickMarks();">MARKS</a>
+            <a href="#0" class="tb tab" id="average-tab" onclick="clickAverage();">AVERAGE</a>
+            <a href="#0" class="tb tab" id="links-tab" onclick="clickLinks();">TIPS</a>
         </div>
         <div id="main-output">
             <div id="marks-wrapper" class="wrapper selected-wrapper">

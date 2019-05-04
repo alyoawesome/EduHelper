@@ -1,0 +1,121 @@
+body{
+    background-color: #222;
+    color: #eee;
+    font-family: sans-serif;
+}
+
+h1#main-header {
+    text-align: center;
+    font-size: 40px;
+}
+
+/* Use div because we want to make a vertical space*/
+div.input-group {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+/* Get the child of div.input-group because we don't want to touch the buttons and use span because we want to make a horizontal space*/
+div.input-group > span.input-item{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+div#submit-button-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+div#save-load-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+div#tabs {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Use padding to make border larger */
+a.tab {
+    padding-right: 10px;
+    padding-left: 10px; 
+    border-style: solid;
+    border-bottom: none;
+    font-size: 25px;
+}
+
+a.selected-tab {
+    background-color: #899D78;
+}
+
+div#main-output {
+    border-top: solid 1px; 
+}
+
+div#main-output > div {
+    display: none;
+}
+
+div#main-output > div.selected-wrapper {
+    display: block;
+}
+
+div.mark-item {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+div#average-wrapper > div {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+div#links-wrapper {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+div#popup-background {
+    display: none;  /*set to none so that the popup doesn't appear by default*/
+    position: fixed; /*allows the popup to cover the whole page*/
+    top: 0px; 
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: grey; 
+    opacity: 0.5; /*We want the popup to be a bit translucent*/
+    z-index: 9998; /*seeting the index to 9998 means that all other html elements on the website will be inaccessible when the popup is in use*/
+    border-style: solid;
+}
+
+div.popup-wrapper {
+    display: none;
+    text-align: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 9999;
+}
+
+.popup {
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-style: solid;
+    border-width: 5px;
+    margin: 100px;
+    margin-left: 300px;
+    margin-right: 300px;
+    padding: 50px;
+}
