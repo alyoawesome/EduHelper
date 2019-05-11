@@ -159,7 +159,7 @@
                     if (marksBySubject.hasOwnProperty(subject)) {
 						var nextSubject = marksBySubject[subject];
                         var nextOutput = document.createElement("div");
-                        nextOutput.innerHTML=subject+": "+nextSubject.finalMark+"%";
+                        nextOutput.innerHTML=subject.toUpperCase()+": "+nextSubject.finalMark+"%";
                         document.getElementById("average-wrapper").appendChild(nextOutput);
                     }  
                 }   
@@ -178,7 +178,7 @@
                 for (var subject in marksBySubject) {
 					if (marksBySubject.hasOwnProperty(subject)) {
 						var nextSubject = marksBySubject[subject];
-                        
+                        subject = subject.toUpperCase();
                         
                         // Declare the nextOutput variable for the math subject and assign to an empty string. The links are added and stored into this variable in the subsequent lines. 
                         var nextOutput = "";
@@ -463,6 +463,9 @@
                 <span>Type of assignment</span>
                 <select id="work-type"> 
                     <option>Test</option>
+                    <option>Quiz</option>
+                    <option>Project</option>
+                    <option>Classwork</option>
                     <option>Homework</option>
                 </select>
             </span>

@@ -119,3 +119,23 @@ div.popup-wrapper {
     margin-right: 300px;
     padding: 50px;
 }
+
+#links-wrapper a {
+    color: #F1D302;
+}
+
+#links-wrapper a:visited {
+    color: #235789;
+}
+
+#links-wrapper li {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+#links-wrapper ul {
+    padding: 0px;
+    margin: 0px;
+}
