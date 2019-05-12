@@ -130,8 +130,8 @@ div.popup-wrapper {
 
 #links-wrapper li {
     list-style-type: none;
-    margin: 0px;
-    padding: 0px;
+    margin-top: 0px;
+    padding: 7px;
     display: block;
 }
 
